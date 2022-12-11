@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:to_do/modules/settings/setting.dart';
 import 'package:to_do/modules/tasks_list/task_list.dart';
 
+import 'add_task_bottom_sheet.dart';
+
 class HomeLayout extends StatefulWidget {
   static const String routeName = 'HomeScreen';
 
@@ -15,13 +17,17 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       extendBody: true,
       appBar: AppBar(
         title: const Text('TO DO'),
       ),
       floatingActionButton:FloatingActionButton(
         shape:const StadiumBorder(side: BorderSide(color: Colors.white,width: 2)),
-        onPressed: (){},
+        onPressed: (){
+          showAddTaskBottomSheet();
+
+        },
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -53,4 +59,13 @@ class _HomeLayoutState extends State<HomeLayout> {
     const SettingsScreen(),
 
   ];
+
+  void showAddTaskBottomSheet(){
+    showModalBottomSheet(
+        isScrollControlled: true,
+
+        context: context, builder: (context)=>TaskBottomSheet());
+    
+    
+  }
 }
