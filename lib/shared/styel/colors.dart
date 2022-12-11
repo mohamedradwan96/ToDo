@@ -1,8 +1,7 @@
- import 'dart:ui';
+import 'dart:ui';
 
-Color colorBlack = Color.fromRGBO(36, 36, 36, 1.0);
- Color colorGold = Color.fromRGBO(183, 147, 95, 1.0);
- Color colorWhite = Color.fromRGBO(255, 255, 255, 1.0);
- Color colorRed = Color.fromRGBO(255, 0, 0, 1.0);
- Color colorPrimaryDark = Color.fromRGBO(20, 26, 46, 1.0);
- Color colorYellow = Color.fromRGBO(250, 204, 29, 1.0);
+const Color colorGreen = Color.fromRGBO(97, 231, 87, 1.0);
+const Color primaryColor = Color.fromRGBO(93, 156, 236, 1.0);
+const Color darkPrimary = Color.fromRGBO(6, 14, 30, 1.0);
+const Color greenBackground = Color.fromRGBO(223, 236, 219, 1.0);
+const Color colorBlack = Color.fromRGBO(54, 54, 54, 1.0);
