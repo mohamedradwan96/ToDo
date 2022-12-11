@@ -17,7 +17,7 @@ class MyThemeData {
           background: greenBackground,
           onBackground: primaryColor,
           surface: Colors.grey,
-          onSurface: Colors.white),
+          onSurface: Colors.black),
       appBarTheme: const AppBarTheme(
         titleTextStyle: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),
         centerTitle: true,
