@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/provider/app_provider.dart';
 import 'package:to_do/shared/styel/mytheme.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'layout/home_layout.dart';
 
 
@@ -17,11 +17,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider = Provider.of<MyProvider>(context);
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
 
       initialRoute: HomeLayout.routeName,
       routes:  {
         HomeLayout.routeName:(context)=>HomeLayout(),
-
       },
       debugShowCheckedModeBanner: false,
       theme:  MyThemeData.lightTheme,

@@ -29,6 +29,6 @@ class MyProvider extends ChangeNotifier {
   Color getSelectedColor(String lang) {
     return languageCode == lang
         ? primaryColor
-        : colorBlack;
+        : Colors.black;
   }
 }

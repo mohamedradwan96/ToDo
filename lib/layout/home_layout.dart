@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/modules/settings/setting.dart';
 import 'package:to_do/modules/tasks_list/task_list.dart';
-
 import 'add_task_bottom_sheet.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -29,7 +28,7 @@ class _HomeLayoutState extends State<HomeLayout> {
           showAddTaskBottomSheet();
 
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add,color: Colors.yellow),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

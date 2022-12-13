@@ -11,7 +11,7 @@ class MyThemeData {
           primary: primaryColor,
           onPrimary: Colors.white,
           secondary: greenBackground,
-          onSecondary: Colors.white,
+          onSecondary: primaryColor,
           error: Colors.red,
           onError: Colors.white,
           background: greenBackground,
@@ -19,8 +19,8 @@ class MyThemeData {
           surface: Colors.grey,
           onSurface: Colors.black),
       appBarTheme: const AppBarTheme(
-        titleTextStyle: TextStyle(fontSize: 26,fontWeight: FontWeight.bold),
-        centerTitle: true,
+          titleTextStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          centerTitle: true,
           backgroundColor: primaryColor,
           iconTheme: IconThemeData(color: Colors.white)),
       textTheme: const TextTheme(
@@ -35,7 +35,7 @@ class MyThemeData {
         backgroundColor: primaryColor,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedIconTheme: IconThemeData(size: 30),
+          selectedIconTheme: IconThemeData(size: 30),
           backgroundColor: Colors.white,
           selectedItemColor: primaryColor,
           unselectedItemColor: Colors.grey));
@@ -44,9 +44,9 @@ class MyThemeData {
       primaryColor: primaryColor,
       scaffoldBackgroundColor: darkPrimary,
       colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          primary: primaryColor,
-          onPrimary: Colors.white,
+          brightness: Brightness.dark,
+          primary: darkPrimary,
+          onPrimary: Colors.white10,
           secondary: darkPrimary,
           onSecondary: Colors.white,
           error: Colors.red,
@@ -56,7 +56,9 @@ class MyThemeData {
           surface: Colors.grey,
           onSurface: Colors.white),
       appBarTheme: const AppBarTheme(
-          backgroundColor: primaryColor,
+          titleTextStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          centerTitle: true,
+          backgroundColor: darkPrimary,
           iconTheme: IconThemeData(color: Colors.white)),
       textTheme: const TextTheme(
         headline1: TextStyle(
@@ -65,6 +67,9 @@ class MyThemeData {
             fontSize: 20, fontWeight: FontWeight.bold, color: primaryColor),
         subtitle2: TextStyle(
             fontSize: 20, fontWeight: FontWeight.bold, color: colorGreen),
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: primaryColor,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.white,

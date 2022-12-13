@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/shared/styel/colors.dart';
 
+
 class TaskItem extends StatelessWidget {
   const TaskItem({Key? key}) : super(key: key);
 
@@ -9,7 +10,7 @@ class TaskItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
+        color:Theme.of(context).colorScheme.onPrimary,
       ),
 
       padding: const EdgeInsets.all(10),
@@ -17,15 +18,16 @@ class TaskItem extends StatelessWidget {
       child:Row(
         children: [
           Container(
-            height: 80, width: 5, color: primaryColor,
+            height: 80, width: 5,
+            color: primaryColor,
           ),
           const SizedBox(width: 15,),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Text("Task Title",style:Theme.of(context).textTheme.subtitle1?.copyWith(fontSize: 18,color: Colors.black),),
-                Text("Task Description"),
+                 Text("Task Title",style:Theme.of(context).textTheme.subtitle1?.copyWith(fontSize: 20,color:Theme.of(context).colorScheme.onSurface),),
+                const Text("Task Description"),
               ],
             ),
           ),
