@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:to_do/modules/settings/theme_bottom_sheet.dart';
 import 'package:to_do/shared/styel/colors.dart';
 
 import '../../provider/app_provider.dart';
 import 'language_bottom_sheet.dart';
-
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({Key? key}) : super(key: key);
@@ -64,7 +62,7 @@ class SettingsTab extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  border: Border.all(color:primaryColor),
+                  border: Border.all(color: primaryColor),
                   borderRadius: BorderRadius.circular(12)),
               child: Text(
                 pro.mode.name,

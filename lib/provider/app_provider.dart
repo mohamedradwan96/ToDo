@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/shared/styel/colors.dart';
 
-
-
 class MyProvider extends ChangeNotifier {
   String languageCode = 'en';
   ThemeMode mode = ThemeMode.light;
@@ -27,8 +25,6 @@ class MyProvider extends ChangeNotifier {
   }
 
   Color getSelectedColor(String lang) {
-    return languageCode == lang
-        ? primaryColor
-        : Colors.black;
+    return languageCode == lang ? primaryColor : Colors.black;
   }
 }

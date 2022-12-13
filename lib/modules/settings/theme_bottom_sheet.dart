@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../provider/app_provider.dart';
 
+import '../../provider/app_provider.dart';
 
 class ThemeModeBottomSheet extends StatelessWidget {
   const ThemeModeBottomSheet({Key? key}) : super(key: key);
@@ -36,22 +36,22 @@ class ThemeModeBottomSheet extends StatelessWidget {
   }
 
   Widget themeItem(BuildContext context, String text, MyProvider pro) => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        text,
-        style: Theme.of(context).textTheme.headline1!.copyWith(
-            color: !((pro.mode == ThemeMode.light && text == 'Light') ||
-                (pro.mode == ThemeMode.dark && text == 'Dark'))
-                ? Theme.of(context).backgroundColor
-                : Theme.of(context).primaryColor),
-      ),
-      Icon(Icons.done,
-          size: 30,
-          color: !((pro.mode == ThemeMode.light && text == 'Light') ||
-              (pro.mode == ThemeMode.dark && text == 'Dark'))
-              ? Theme.of(context).backgroundColor
-              : Theme.of(context).primaryColor)
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: Theme.of(context).textTheme.headline1!.copyWith(
+                color: !((pro.mode == ThemeMode.light && text == 'Light') ||
+                        (pro.mode == ThemeMode.dark && text == 'Dark'))
+                    ? Theme.of(context).backgroundColor
+                    : Theme.of(context).primaryColor),
+          ),
+          Icon(Icons.done,
+              size: 30,
+              color: !((pro.mode == ThemeMode.light && text == 'Light') ||
+                      (pro.mode == ThemeMode.dark && text == 'Dark'))
+                  ? Theme.of(context).backgroundColor
+                  : Theme.of(context).primaryColor)
+        ],
+      );
 }

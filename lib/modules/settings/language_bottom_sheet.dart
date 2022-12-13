@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../provider/app_provider.dart';
 
-
-
 class LanguageBottomSheet extends StatelessWidget {
   const LanguageBottomSheet({Key? key}) : super(key: key);
 

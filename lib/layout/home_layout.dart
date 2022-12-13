@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:to_do/modules/settings/setting.dart';
 import 'package:to_do/modules/tasks_list/task_list.dart';
+
 import 'add_task_bottom_sheet.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -22,13 +22,13 @@ class _HomeLayoutState extends State<HomeLayout> {
       appBar: AppBar(
         title: const Text('TO DO'),
       ),
-      floatingActionButton:FloatingActionButton(
-        shape:const StadiumBorder(side: BorderSide(color: Colors.white,width: 2)),
-        onPressed: (){
+      floatingActionButton: FloatingActionButton(
+        shape: const StadiumBorder(
+            side: BorderSide(color: Colors.white, width: 2)),
+        onPressed: () {
           showAddTaskBottomSheet();
-
         },
-        child: const Icon(Icons.add,color: Colors.yellow),
+        child: const Icon(Icons.add, color: Colors.yellow),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -39,33 +39,30 @@ class _HomeLayoutState extends State<HomeLayout> {
           elevation: 0,
           currentIndex: currentIndex,
           onTap: (index) {
-            currentIndex = index ;
-            setState(() {
-
-            });
+            currentIndex = index;
+            setState(() {});
           },
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tasks List'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.list), label: 'Tasks List'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: 'Settings'),
           ],
         ),
       ),
-      body:tabs[currentIndex] ,
+      body: tabs[currentIndex],
     );
   }
-  List<Widget>tabs =[
+
+  List<Widget> tabs = [
     const TasksListScreen(),
     const SettingsTab(),
-
   ];
 
-  void showAddTaskBottomSheet(){
+  void showAddTaskBottomSheet() {
     showModalBottomSheet(
         isScrollControlled: true,
-
-        context: context, builder: (context)=>TaskBottomSheet());
-    
-    
+        context: context,
+        builder: (context) => TaskBottomSheet());
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:to_do/modules/tasks_list/task_item.dart';
 import 'package:to_do/shared/styel/colors.dart';
 
-
 class TasksListScreen extends StatelessWidget {
   const TasksListScreen({Key? key}) : super(key: key);
 
@@ -27,8 +26,8 @@ class TasksListScreen extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount:15 ,
-              itemBuilder: ((context, index) =>const TaskItem() )),
+              itemCount: 15,
+              itemBuilder: ((context, index) => const TaskItem())),
         )
       ],
     );
