@@ -15,6 +15,7 @@ class HomeLayout extends StatefulWidget {
 class _HomeLayoutState extends State<HomeLayout> {
   int currentIndex = 0;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -33,7 +34,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         notchMargin: 7,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: BottomNavigationBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -56,7 +57,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   }
   List<Widget>tabs =[
     const TasksListScreen(),
-    const SettingsScreen(),
+    const SettingsTab(),
 
   ];
 

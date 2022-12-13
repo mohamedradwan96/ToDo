@@ -8,11 +8,8 @@ class TaskBottomSheet extends StatefulWidget {
 
 class _TaskBottomSheetState extends State<TaskBottomSheet> {
   var titelControler = TextEditingController();
-
   var descriptionControler = TextEditingController();
-
   GlobalKey <FormState> formkey = GlobalKey<FormState>();
-
   DateTime selectedDate = DateTime.now();
   TimeOfDay selecteTime = TimeOfDay(hour: 8, minute: 30);
 
@@ -21,6 +18,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.all(10),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Column(
           children: [
             Text(
@@ -30,8 +28,8 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
             ),
             const SizedBox(height: 10),
             Form(
+                key: formkey,
                 child: Column(
-              key: formkey,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
@@ -56,6 +54,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                   height: 20,
                 ),
                 TextFormField(
+                  maxLines: 3,
                   controller: descriptionControler,
                   validator: (text) {
                     if (text == '') {

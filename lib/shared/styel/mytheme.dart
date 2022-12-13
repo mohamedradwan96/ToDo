@@ -42,16 +42,16 @@ class MyThemeData {
 
   static ThemeData darkTheme = ThemeData(
       primaryColor: primaryColor,
-      scaffoldBackgroundColor: greenBackground,
+      scaffoldBackgroundColor: darkPrimary,
       colorScheme: const ColorScheme(
           brightness: Brightness.light,
           primary: primaryColor,
           onPrimary: Colors.white,
-          secondary: greenBackground,
+          secondary: darkPrimary,
           onSecondary: Colors.white,
           error: Colors.red,
           onError: Colors.white,
-          background: greenBackground,
+          background: darkPrimary,
           onBackground: primaryColor,
           surface: Colors.grey,
           onSurface: Colors.white),
