@@ -44,6 +44,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.4.0
   cloud_firestore: ^4.2.0
+  flutter_slidable: ^2.0.0
+  convex_bottom_bar: ^3.1.0+1
+  curved_navigation_bar: ^1.0.3
 
 dev_dependencies:
   flutter_test:

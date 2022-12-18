@@ -3,6 +3,8 @@ import 'package:to_do/models/task.dart';
 import 'package:to_do/shared/network/local/firebase_utils.dart';
 import 'package:to_do/shared/styel/colors.dart';
 
+import '../shared/componants/componnet.dart';
+
 class TaskBottomSheet extends StatefulWidget {
   @override
   State<TaskBottomSheet> createState() => _TaskBottomSheetState();
@@ -13,7 +15,7 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
   var descriptionControler = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
-  TimeOfDay selecteTime = TimeOfDay(hour: 8, minute: 30);
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,24 +107,6 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text("Select Time",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                            fontSize: 20,
-                            color: Theme.of(context).colorScheme.onSurface)),
-                    InkWell(
-                      onTap: () {
-                        ShowTimePiker(context);
-                      },
-                      child: Text(
-                        "${selecteTime.hour}:${selecteTime.minute} ",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     ElevatedButton (
                         style: ElevatedButton.styleFrom(
                             backgroundColor: primaryColor),
@@ -131,13 +115,16 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                             Task task = Task(
                                 title: titelControler.text,
                                 description: descriptionControler.text,
-                                date: selectedDate.microsecondsSinceEpoch,
-                                time: selecteTime.hashCode);
+                                date: DateUtils.dateOnly(selectedDate).microsecondsSinceEpoch,
+                              );
+                            showloading(context,'Loading...');
                             addTasksToFireStore(task);
-                            Navigator.pop(context);
+                            hideloading(context);
+                            showmessage(context,'Task Add Successfully','OK',(){
+                              Navigator.pop(context);});
                           }
                         },
-                        child: const Text(
+                        child:  const Text(
                           "Add Task",
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ))
@@ -154,21 +141,11 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(Duration(days: 10000000)));
+        lastDate: DateTime.now().add(Duration(days: 365)));
     setState(() {
       if (chosendate == null) return;
       selectedDate = chosendate;
     });
   }
 
-  void ShowTimePiker(context) async {
-    TimeOfDay? chosentime = await showTimePicker(
-        context: context,
-        initialTime:
-            TimeOfDay(hour: selecteTime.hour, minute: selecteTime.minute));
-    setState(() {
-      if (chosentime == null) return;
-      selecteTime = chosentime;
-    });
-  }
 }
