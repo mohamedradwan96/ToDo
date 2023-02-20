@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:to_do/models/task.dart';
 import 'package:to_do/shared/network/local/firebase_utils.dart';
-import 'package:to_do/shared/styel/colors.dart';
-
 import '../../shared/componants/componnet.dart';
+import '../../shared/styel/colors.dart';
 
 class TaskItem extends StatefulWidget {
   Task task;
-
   TaskItem(this.task);
 
   @override
@@ -41,6 +39,7 @@ class _TaskItemState extends State<TaskItem> {
           onPressed: (context) {
             titelControler.text = widget.task.title;
             descriptionControler.text = widget.task.description;
+            selectedDate= DateTime.fromMicrosecondsSinceEpoch(widget.task.date);
             showDialog(
                 context: context,
                 builder: (context) {
@@ -57,10 +56,9 @@ class _TaskItemState extends State<TaskItem> {
                                   .textTheme
                                   .subtitle1
                                   ?.copyWith(
-                                    fontSize: 26,
-                                  ),
-                            ),
-                          ),
+                                fontSize: 26,
+                              ),
+                            ),),
                           const SizedBox(height: 10),
                           Form(
                               key: formkey,
@@ -73,20 +71,23 @@ class _TaskItemState extends State<TaskItem> {
                                         color: Theme.of(context)
                                             .colorScheme
                                             .onSurface),
-                                    controller: titelControler,
+                                    controller:titelControler,
+                                    // onChanged: (value) {
+                                    //   widget.task.title = value;
+                                    // }
                                     validator: (text) {
-                                      if (text == '') {
-                                        return "Please Enter Title";
-                                      }
-                                      return null;
-                                    },
-                                    decoration: const InputDecoration(
+                                    if (text == '') {
+                                      return "Please Enter Title";
+                                    }
+                                    return null;
+                                  },
+                                    decoration:  const InputDecoration(
                                         label: Text("Title"),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                          width: 2,
-                                          color: primaryColor,
-                                        )),
+                                              width: 2,
+                                              color: primaryColor,
+                                            )),
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 width: 2,
@@ -103,6 +104,9 @@ class _TaskItemState extends State<TaskItem> {
                                             .onSurface),
                                     maxLines: 3,
                                     controller: descriptionControler,
+                                    onChanged: (value) {
+                                      widget.task.description = value;
+                                    },
                                     validator: (text) {
                                       if (text == '') {
                                         return "Please Enter Description";
@@ -113,9 +117,9 @@ class _TaskItemState extends State<TaskItem> {
                                         label: Text("Description"),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                          width: 2,
-                                          color: primaryColor,
-                                        )),
+                                              width: 2,
+                                              color: primaryColor,
+                                            )),
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 width: 2,
@@ -130,10 +134,10 @@ class _TaskItemState extends State<TaskItem> {
                                           .textTheme
                                           .subtitle1
                                           ?.copyWith(
-                                              fontSize: 20,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSurface)),
+                                          fontSize: 20,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurface)),
                                   InkWell(
                                     onTap: () {
                                       ShowdatePiker(context);
@@ -142,7 +146,7 @@ class _TaskItemState extends State<TaskItem> {
                                       "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
                                       textAlign: TextAlign.center,
                                       style:
-                                          Theme.of(context).textTheme.subtitle1,
+                                      Theme.of(context).textTheme.subtitle1,
                                     ),
                                   ),
                                   const SizedBox(
@@ -153,23 +157,18 @@ class _TaskItemState extends State<TaskItem> {
                                           backgroundColor: primaryColor),
                                       onPressed: () {
                                         if (formkey.currentState!.validate()) {
+                                          widget.task.title= titelControler.text;
+                                          widget.task.description= descriptionControler.text;
+                                          widget.task.date= DateUtils.dateOnly(selectedDate).microsecondsSinceEpoch;
                                           showloading(context, 'Loading...');
-                                          updateTask(
-                                            widget.task.id,
-                                            titelControler.text,
-                                            descriptionControler.text,
-                                            selectedDate.microsecondsSinceEpoch,
-                                          ).then((value) {
-                                            hideloading(context);
-                                            showmessage(
-                                                context,
-                                                'Task Updated Successfully',
-                                                'OK', () {
-                                              Navigator.pop(context);
-                                              Navigator.pop(context);
-                                            });
-                                          }).catchError((error) {
-                                            print(error);
+                                          updateTask( widget.task);
+                                          hideloading(context);
+                                          showmessage(
+                                              context,
+                                              'Task Updated Successfully',
+                                              'OK', () {
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
                                           });
                                         }
                                       },
@@ -192,12 +191,11 @@ class _TaskItemState extends State<TaskItem> {
         )
       ]),
       child: Container(
-
           decoration: BoxDecoration(
             border: Border.all(
-              color:(widget.task.isdone==false)?Colors.blue:Colors.green,
-              width:3
-            ),
+                color:
+                    (widget.task.isdone == false) ? Colors.blue : Colors.green,
+                width: 3),
             borderRadius: BorderRadius.circular(20),
             color: Theme.of(context).colorScheme.onPrimary,
           ),
@@ -208,10 +206,13 @@ class _TaskItemState extends State<TaskItem> {
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color:(widget.task.isdone==false)?Colors.blue:Colors.green,
-                      width:3
-                  ),
-                  color: (widget.task.isdone==false)?Colors.blue:Colors.green,
+                      color: (widget.task.isdone == false)
+                          ? Colors.blue
+                          : Colors.green,
+                      width: 3),
+                  color: (widget.task.isdone == false)
+                      ? Colors.blue
+                      : Colors.green,
                 ),
                 height: 80,
                 width: 5,
@@ -245,26 +246,31 @@ class _TaskItemState extends State<TaskItem> {
                   widget.task.isdone = true;
                   setState(() {
                     isDoneTask(widget.task.id, widget.task.isdone);
-
                   });
-
                 },
-                child:Icon((widget.task.isdone==false)?Icons.done:Icons.done_outline_sharp, color: Colors.white, size: 40,),
+                child: Icon(
+                  (widget.task.isdone == false)
+                      ? Icons.done
+                      : Icons.done_outline_sharp,
+                  color: Colors.white,
+                  size: 40,
+                ),
               ),
             ],
           )),
     );
   }
-
   void ShowdatePiker(context) async {
     DateTime? chosendate = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: selectedDate ,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(Duration(days: 365)));
+        lastDate: DateTime.now().add(const Duration(days: 365)));
     setState(() {
       if (chosendate == null) return;
-      selectedDate = chosendate;
+      selectedDate = DateUtils.dateOnly(chosendate);
+      print(selectedDate);
     });
   }
+
 }

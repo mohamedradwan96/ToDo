@@ -1,10 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:to_do/modules/settings/setting.dart';
-import 'package:to_do/modules/tasks_list/task_list.dart';
+
 import 'package:to_do/shared/styel/colors.dart';
 
-import 'add_task_bottom_sheet.dart';
+import '../add_task/add_task_bottom_sheet.dart';
+import '../settings/setting.dart';
+import '../tasks_list/task_list.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String routeName = 'HomeScreen';
@@ -19,20 +20,20 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      extendBody: true,
       appBar: AppBar(
-        title: const Text('TO DO'),
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   shape: const StadiumBorder(
-      //       side: BorderSide(color: Colors.white, width: 2)),
-      //   onPressed: () {
-      //     showAddTaskBottomSheet();
-      //   },
-      //   child: const Icon(Icons.add, color: Colors.yellow),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          shape: const OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(35),
+                  bottomRight: Radius.circular(35))),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('TO DO'),
+            Icon(Icons.drive_file_rename_outline)
+
+          ],
+        ),),
       bottomNavigationBar:CurvedNavigationBar(
         color: primaryColor,
         backgroundColor: Colors.white,
@@ -59,10 +60,11 @@ class _HomeLayoutState extends State<HomeLayout> {
       SettingsTab(),
   ];
 
-  void showAddTaskBottomSheet() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (context) => TaskBottomSheet());
-  }
+  // void showAddTaskBottomSheet() {
+  //   showModalBottomSheet(
+  //       isScrollControlled: true,
+  //       context: context,
+  //       builder: (context) => TaskBottomSheet());
+  //
+  // }
 }

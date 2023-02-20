@@ -28,16 +28,13 @@ Future<void> deleteTaskFromFireStore(String id) {
   return getCollection().doc(id).delete();
 }
 
-Future<void> updateTask(String id,String title ,String description , int date ) {
-  return getCollection().doc(id).update({
-    "title": title,
-    "description":description,
-   "date":date,
-
-  });
+Future<void> updateTask(Task task ) {
+  return getCollection().doc(task.id).update(
+   task.toJson()
+  );
 }
-Future<void> isDoneTask(String id,bool isDone) {
-  return getCollection().doc(id).update({
+Future<void> isDoneTask(String id,bool isDone) async{
+  return await getCollection().doc(id).update({
     'isDone':isDone
   });
 }
