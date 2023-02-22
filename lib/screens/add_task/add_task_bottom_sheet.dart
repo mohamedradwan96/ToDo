@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/models/task.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:to_do/shared/network/local/firebase_utils.dart';
 import 'package:to_do/shared/styel/colors.dart';
+import '../../services/notifications.dart';
 import '../../shared/componants/componnet.dart';
 import '../../widegets/custom_text_formfield.dart';
 
@@ -10,10 +12,21 @@ class TaskBottomSheet extends StatefulWidget {
   State<TaskBottomSheet> createState() => _TaskBottomSheetState();
 }
 class _TaskBottomSheetState extends State<TaskBottomSheet> {
+
+
+  late final NotificationService service;
+
   var titelControler = TextEditingController();
   var descriptionControler = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   DateTime selectedDate = DateTime.now();
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tz.initializeTimeZones();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +104,11 @@ class _TaskBottomSheetState extends State<TaskBottomSheet> {
                               Navigator.pop(context);
                             });
                           }
+                         NotificationService().showNotification(
+                             1,
+                             "TODO TASKS",
+                             "TASK:${titelControler.text} ..... Successfully Added ✌️",
+                             1);
                         },
                         child: const Text(
                           "Add Task",

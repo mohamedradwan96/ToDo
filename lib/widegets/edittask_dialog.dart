@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:timezone/data/latest.dart' as tz;
 import '../models/task.dart';
+import '../services/notifications.dart';
 import '../shared/componants/componnet.dart';
 import '../shared/network/local/firebase_utils.dart';
 import '../shared/styel/colors.dart';
@@ -23,6 +24,7 @@ class _EditTAshDialogState extends State<EditTAshDialog> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    tz.initializeTimeZones();
     titelControler.text = widget.task.title;
     descriptionControler.text = widget.task.description;
     selectedDate= DateTime.fromMicrosecondsSinceEpoch(widget.task.date);
@@ -159,6 +161,11 @@ class _EditTAshDialogState extends State<EditTAshDialog> {
                               Navigator.pop(context);
                             });
                           }
+                          NotificationService().showNotification(
+                              1,
+                              "TODO TASKS",
+                              "TASK:${titelControler.text} ..... Successfully Edit ✌️",
+                              1);
                         },
                         child: const Text(
                           "Update Task",
